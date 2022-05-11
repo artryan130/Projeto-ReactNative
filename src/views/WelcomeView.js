@@ -11,11 +11,10 @@ export default props => {
             />
             <Text style={style.text}>O melhor lugar para encontrar e gerenciar atividades !</Text>
             <Button
-            style={style.button} 
+            color='#23C7D7'
             title="Iniciar"
             />
         </View>
-        
     )
 }
 
@@ -43,12 +42,4 @@ const style = StyleSheet.create({
         fontSize: 20,
         textAlign: "center"
     },
-    button: {
-    }
-
-
-
-
-
-
 })
