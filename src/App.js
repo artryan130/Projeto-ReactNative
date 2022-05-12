@@ -13,9 +13,6 @@ export default props => {
         <Stack.Screen
           name='WelcomeView'
           component={WelcomeView}
-          options={{
-            title:"Seja bem vindo"
-          }}
         />
       </Stack.Navigator>
     </NavigationContainer>
