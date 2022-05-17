@@ -2,7 +2,7 @@ import React from "react";
 import {Text, View, StyleSheet, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
 
-export default ({ navigation }) => {
+export default props => {
     return (
         <View style={style.welcome}>
             <Text style={style.title}>Bem vindo ao iResenha!</Text>
@@ -19,7 +19,6 @@ export default ({ navigation }) => {
                 backgroundColor: '#23C7D7',
             }}
             title="Iniciar"
-            onPress={() => navigation.navigate("NameView")}
             />
         </View>
     )
