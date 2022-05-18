@@ -6,7 +6,7 @@ import {NameView} from './views/NameView';
 
 const Stack = createNativeStackNavigator()
 
-export function App() {
+export default () => {
   return (
 
     <NavigationContainer>

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput } from "react-native"; 
 import { Button } from 'react-native-elements';
 
-const [user, setUser] = useState('')
-
 export function NameView() {
+    
+    const [user, setUser] = useState('')
+
     return (
         <View>
             <Text>
