@@ -1,25 +1,29 @@
 import React from 'react';
-import {NavigationContainer} from "@react-navigation/native";
-import {createNativeStackNavigator} from "@react-navigation/native-stack";
-import {WelcomeView} from './views/WelcomeView';
-import {NameView} from './views/NameView';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { WelcomeView } from './views/WelcomeView';
+import { NameView } from './views/NameView';
+import { HomeView } from './views/HomeView';
 
-const Stack = createNativeStackNavigator()
+const Tab = createBottomTabNavigator()
 
 export default () => {
   return (
-
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="WelcomeView">
-        <Stack.Screen
+      <Tab.Navigator initialRouteName="WelcomeView">
+        <Tab.Screen
           name='WelcomeView'
           component={WelcomeView}
         />
-        <Stack.Screen
+        <Tab.Screen
           name='NameView'
           component={NameView}
         />
-      </Stack.Navigator>
+        <Tab.Screen
+          name='HomeView'
+          component={HomeView}
+        />
+      </Tab.Navigator>
     </NavigationContainer>
   )
 }

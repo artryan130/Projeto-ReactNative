@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
 
-export function NameView() {
+export function NameView({ navigation }) {
     
     const [user, setUser] = useState('')
 
@@ -30,6 +30,10 @@ export function NameView() {
                 }}
                 title="Continuar"
                 style={style.button}
+                onPress={() => navigation.navigate("HomeView", {
+                    paramKey: user.name,
+                    })
+                }
             />
         </View>
     )
