@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { WelcomeView } from './views/WelcomeView';
 import { NameView } from './views/NameView';
 import { HomeView } from './views/HomeView';
+import { NewView } from './views/NewView';
 
 const Tab = createBottomTabNavigator()
 
@@ -22,6 +23,10 @@ export default () => {
         <Tab.Screen
           name='HomeView'
           component={HomeView}
+        />
+        <Tab.Screen
+          name='NewView'
+          component={NewView}
         />
       </Tab.Navigator>
     </NavigationContainer>

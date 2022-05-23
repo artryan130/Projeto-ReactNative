@@ -2,20 +2,25 @@ import React from "react";
 import {Text, View, StyleSheet } from "react-native"; 
 import { SingleCard } from "../components/SingleCard";
 
-export function HomeView({route}) {
+export function HomeView({ route }) {
     
+    const { paramKey } = route.params
+
     const itens = [
         {
             title: (<Text>Atividades Planejadas</Text>),
-            subtitle: (<Text>Confira suas atividades planejadas</Text>)
+            subtitle: (<Text>Confira suas atividades planejadas</Text>),
+            rota: (<Text>planned</Text>)
         },
         {
             title: (<Text>Nova Atividade</Text>),
-            subtitle: (<Text>Criar uma nova atividade</Text>)
+            subtitle: (<Text>Criar uma nova atividade</Text>),
+            rota: (<Text>NewView</Text>)
         },
         {
             title: (<Text>Histórico de atividades</Text>),
-            subtitle: (<Text>Suas atividades ja concluidas</Text>)
+            subtitle: (<Text>Suas atividades ja concluidas</Text>),
+            rota: (<Text>history</Text>)
         }
     ]
     
@@ -25,7 +30,7 @@ export function HomeView({route}) {
     
     return (
         <View style={style.home}>
-            <Text style={style.text}>Olá {route.params.paramKey}</Text>
+            <Text style={style.text}>Olá {paramKey}</Text>
             <Text style={style.text2}>Escolha alguma das opções do menu abaixo para começar a utilizar o aplicativo</Text>
             <View style={style.cards}>{generateCards()}</View>
         </View>

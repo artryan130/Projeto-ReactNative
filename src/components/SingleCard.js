@@ -1,15 +1,18 @@
 import React, { Fragment } from "react";
-import {Text, View, StyleSheet} from "react-native"; 
+import {Text, View, StyleSheet, TouchableOpacity} from "react-native"; 
 
-export function SingleCard(props, index) {
+export function SingleCard( props, index, {navigation} ) {
 
-    const { title, subtitle } = props
+    const { title, subtitle, rota } = props
 
     return (
-        <View style={style.card} key={index}>
-            <Text style={style.title}>{title}</Text>
-            <Text style={style.title2}>{subtitle}</Text> 
-        </View> 
+        // <View style={style.card} key={index}>
+            <TouchableOpacity style={style.card} key={index}>
+                <Text style={style.title}>{title}</Text>
+                <Text style={style.title2}>{subtitle}</Text> 
+            </TouchableOpacity>
+        // </View>
+         
     )
 }
 
