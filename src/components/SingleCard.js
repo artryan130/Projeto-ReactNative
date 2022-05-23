@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import {Text, View, StyleSheet, TouchableOpacity} from "react-native"; 
 
-export function SingleCard( props, index, {navigation} ) {
+export function SingleCard( props, index ) {
 
     const { title, subtitle, rota } = props
 
