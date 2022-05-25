@@ -2,30 +2,30 @@ import React from "react";
 import {Text, View, StyleSheet } from "react-native"; 
 import { SingleCard } from "../components/SingleCard";
 
-export function HomeView({ route }) {
+export function HomeView({ route, navigation }) {
     
     const { paramKey } = route.params
 
     const itens = [
         {
-            title: (<Text>Atividades Planejadas</Text>),
-            subtitle: (<Text>Confira suas atividades planejadas</Text>),
-            rota: (<Text>planned</Text>)
+            title: 'Atividades Planejadas',
+            subtitle: 'Confira suas atividades planejadas',
+            rota: 'PlannedView'
         },
         {
-            title: (<Text>Nova Atividade</Text>),
-            subtitle: (<Text>Criar uma nova atividade</Text>),
-            rota: (<Text>NewView</Text>)
+            title: 'Nova Atividade',
+            subtitle: 'Criar uma nova atividade',
+            rota: 'NewView'
         },
         {
-            title: (<Text>Histórico de atividades</Text>),
-            subtitle: (<Text>Suas atividades ja concluidas</Text>),
-            rota: (<Text>history</Text>)
+            title: 'Histórico de atividades',
+            subtitle: 'Suas atividades ja concluidas',
+            rota: 'HistoryView'
         }
     ]
     
     const generateCards = () => {
-        return itens.map((e, index) => SingleCard(e, index))
+        return itens.map((e, index) => SingleCard(e, index, navigation))
     }
     
     return (

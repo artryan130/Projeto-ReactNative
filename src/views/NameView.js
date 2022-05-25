@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
+import { AntDesign } from '@expo/vector-icons';
 
 export function NameView({ navigation }) {
     
@@ -11,16 +12,16 @@ export function NameView({ navigation }) {
             <Text style={style.text}>
                 Olá! Insira o seu nome para continuarmos
             </Text>
-            <TextInput
-                onChangeText={name => setUser({...user, name })} 
-                placeholder="Digite o seu nome"
-                value={user.name}
-                style={style.input}
-            />
-            <Image
-            style={style.image}
-            source={require('../../assets/image8.png')}
-            />
+            <View style={style.inputview}>
+                <AntDesign name="user" size={24} color="black" />
+                <TextInput
+                    onChangeText={name => setUser({...user, name })} 
+                    placeholder="Digite o seu nome"
+                    value={user.name}
+                    style={style.input}
+                />
+            </View>
+            
             <Button
                 buttonStyle={{
                     width: 230,
@@ -56,20 +57,24 @@ const style = StyleSheet.create({
     },
     input: {
         width: 300,
-        height: 50,
+        height: 50,   
+    },
+    // image: {
+    //     position: "absolute",
+    //     marginTop: 340,
+    //     left: 70,
+    // },
+    inputview: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
         marginTop: 200,
         marginBottom: 140,
         borderWidth: 1,
         borderColor: '#23C7D7',
         borderRadius: 10,
         paddingLeft: 40
-    },
-    image: {
-        position: "absolute",
-        marginTop: 340,
-        left: 70,
     }
-
-
 
 })
