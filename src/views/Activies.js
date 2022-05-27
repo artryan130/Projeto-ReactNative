@@ -2,13 +2,29 @@ import React from "react";
 import {Text, View, StyleSheet, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
 
-export function NewView({ route, navigation }){
+export function Activies({ route, navigation }){
 
+    const itens = [
+        {
+            title: 'Tipo de atividade',
+        },
+        {
+            title: 'Quantidade de Participantes',
+        },
+        {
+            title: 'Data Planejada',
+        }
+    ]
+
+
+    const generateCards = () => {
+        return itens.map((e, index) => SingleCard(e, index, navigation))
+    }
 
 
     return (
         <View style={style.gen}>
-            <View style={style.box}>
+            <Div style={style.box}>
             <Button>
                 Voltar
             </Button>
@@ -18,13 +34,13 @@ export function NewView({ route, navigation }){
             <Text>
                 Preencha os filtros para sugerirmos uma nova atividade
             </Text>
-            <View style={style.cardBox}>
+            <Div style={style.cardBox}>
                 <View style={style.cards}>{generateCards()}</View>
-            </View>
+            </Div>
             <Button style={style.button2}>
                 Continuar
             </Button>
-            </View>
+            </Div>
         </View>
     )
 }
