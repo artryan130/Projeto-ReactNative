@@ -2,9 +2,19 @@ import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
 import { AntDesign } from '@expo/vector-icons';
+import * as SecureStore from 'expo-secure-store';
+
+async function save(key, value) {
+    await SecureStore.setItemAsync('name', JSON.stringify(value));
+}
+
+async function read() {
+    const value = await SecureStore.getItemAsync('name');
+    return value;
+}
 
 export function NameView({ navigation }) {
-    
+
     const [user, setUser] = useState('')
 
     return (
@@ -31,10 +41,12 @@ export function NameView({ navigation }) {
                 }}
                 title="Continuar"
                 style={style.button}
-                onPress={() => navigation.navigate("HomeView", {
+                onPress={() => {
+                    save('name', user)
+                    navigation.navigate("HomeView", {
                     paramKey: user.name,
                     })
-                }
+                }}
             />
         </View>
     )
