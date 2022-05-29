@@ -23,7 +23,7 @@ export function NameView({ navigation }) {
                 Olá! Insira o seu nome para continuarmos
             </Text>
             <View style={style.inputview}>
-                <AntDesign name="user" size={24} color="black" />
+                <AntDesign name="user" size={24} color="black" style={style.icon} />
                 <TextInput
                     onChangeText={name => setUser({...user, name })} 
                     placeholder="Digite o seu nome"
@@ -86,7 +86,7 @@ const style = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#23C7D7',
         borderRadius: 10,
-        paddingLeft: 40
-    }
+        paddingLeft: 15
+    },
 
 })
