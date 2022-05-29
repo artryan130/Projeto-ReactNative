@@ -39,7 +39,7 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         textDecorationLine: "underline",
         textDecorationColor: '#23C7D7',
-        marginTop: 30
+        marginTop: 80
     },
     image: {
         marginTop: 100,

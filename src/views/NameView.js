@@ -64,7 +64,7 @@ const style = StyleSheet.create({
         fontSize: 30,
         // fontFamily: 'Poppins-Medium',
         fontWeight: 'bold',
-        marginTop: 30,
+        marginTop: 80,
         textAlign: 'center'
     },
     input: {

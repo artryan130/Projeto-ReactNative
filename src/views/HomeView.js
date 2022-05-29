@@ -49,7 +49,7 @@ const style = StyleSheet.create({
         fontSize: 25,
         // fontFamily: 'Poppins-Medium',
         fontWeight: 'bold',
-        marginTop: 30
+        marginTop: 80
     },
     text2: {
         fontSize: 21,
