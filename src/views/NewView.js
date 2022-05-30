@@ -37,7 +37,7 @@ export function NewView({ route, navigation }){
 const style = StyleSheet.create({
     gen:{
         backgroundColor: '#23C7D74A',
-        margin: 10
+        margin: 0
     },
     box: {
         backgroundColor: '#FFFFFF',
