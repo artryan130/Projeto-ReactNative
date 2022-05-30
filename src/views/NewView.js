@@ -19,9 +19,14 @@ export function NewView({ route, navigation }){
                 Preencha os filtros para sugerirmos uma nova atividade
             </Text>
             <View style={style.cardBox}>
-                <View style={style.cards}>{generateCards()}</View>
+                <View style={style.cards}>Tipo de atividade</View>
+                <View style={style.cards}>Quantidade de Participantes</View>
+                <View style={style.cards}>Data Planejada</View>
             </View>
-            <Button style={style.button2}>
+            <Button 
+            style={style.button2} 
+            onPress={() => navigation.navigate('', {})}
+            >
                 Continuar
             </Button>
             </View>
