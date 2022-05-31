@@ -20,7 +20,7 @@ export function HomeView({ route, navigation }) {
         {
             title: 'Histórico de atividades',
             subtitle: 'Suas atividades ja concluidas',
-            rota: 'Histórico de atividades'
+            rota: 'Histórico de Atividades'
         }
     ]
     
