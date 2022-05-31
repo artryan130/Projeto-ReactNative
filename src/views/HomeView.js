@@ -10,17 +10,17 @@ export function HomeView({ route, navigation }) {
         {
             title: 'Atividades Planejadas',
             subtitle: 'Confira suas atividades planejadas',
-            rota: 'PlannedView'
+            rota: 'Atividades Planejadas'
         },
         {
             title: 'Nova Atividade',
             subtitle: 'Criar uma nova atividade',
-            rota: 'NewView'
+            rota: 'Nova Atividade'
         },
         {
             title: 'Histórico de atividades',
             subtitle: 'Suas atividades ja concluidas',
-            rota: 'HistoryView'
+            rota: 'Histórico de atividades'
         }
     ]
     

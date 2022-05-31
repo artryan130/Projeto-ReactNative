@@ -54,7 +54,7 @@ export function TabRoutes({ route }) {
         })}
         >
         <Tab.Screen
-          name='PlannedView'
+          name='Atividades Planejadas'
           component={PlannedView}
           options= {
             { tabBarIcon: (({size, color}) => (
@@ -63,7 +63,7 @@ export function TabRoutes({ route }) {
           }
         />
         <Tab.Screen
-          name='NewView'
+          name='Nova Atividade'
           component={NewView}
           options= {
             { tabBarIcon: (({size, color}) => (
@@ -72,7 +72,7 @@ export function TabRoutes({ route }) {
           }
         />
         <Tab.Screen
-          name='HistoryView'
+          name='Histórico de Atividades'
           component={HistoryView}
           options= {
             { tabBarIcon: (({size, color}) => (
