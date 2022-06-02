@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Entypo } from '@expo/vector-icons'; 
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
-
+import { SuggestedView } from './views/SuggestedView'
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
@@ -36,6 +36,10 @@ export default function StackRoutes() {
           name='TabRoutes'
           component={TabRoutes}
         />
+        <Stack.Screen
+          name='SuggestedView'
+          component={SuggestedView}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   )

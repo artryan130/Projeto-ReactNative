@@ -1,10 +1,13 @@
-import React from "react";
-import {Text, View, StyleSheet, Image, Fragment } from "react-native"; 
-import { Button } from 'react-native-elements';
+import React, { useState } from "react";
+import {Text, View, StyleSheet, TextInput } from "react-native"; 
+import { Button, Input } from 'react-native-elements';
+import RNPickerSelect from 'react-native-picker-select';
 
 export function NewView({ route, navigation }){
 
-
+    const [type, setType] = useState('')
+    const [number, setNumber] = useState('')
+    const [date, setDate] = useState('')
 
     return (
         <View style={style.gen}>
@@ -19,16 +22,52 @@ export function NewView({ route, navigation }){
                 Preencha os <Text style={{color: '#23C7D7'}}>filtros</Text> para sugerirmos uma <Text style={{color: '#23C7D7'}}>nova atividade</Text>
             </Text>
             <View style={style.cardBox}>
-                <Text style={style.cards}>Tipo de atividade</Text>
-                <Text style={style.cards}>Quantidade de Participantes</Text>
-                <Text style={style.cards}>Data Planejada</Text>
+
+                <View style={style.cards}>
+                    <RNPickerSelect
+                        placeholder={{
+                            label: 'Tipo de atividade',
+                            value: null,
+                        }}
+                        onValueChange={(type) => setType(type)}
+                        items={[
+                            { label: 'Educacional', value: 'education' },
+                            { label: 'Recriação', value: 'recreational' },
+                            { label: 'Social', value: 'social' },
+                            { label: 'DIY(Faça voce mesmo)', value: 'diy' },
+                            { label: 'Caridade', value: 'charity' },
+                            { label: 'Culinária', value: 'cooking' },
+                            { label: 'Relaxamento', value: 'relaxation' },
+                            { label: 'Música', value: 'music' },
+                            { label: 'Trabalho', value: 'busywork' },
+                        ]}
+                    />
+                </View>
+                
+                <TextInput
+                    onChangeText={number => setNumber(number)} 
+                    placeholder="Quantidade de Participantes"
+                    value={number}
+                    style={style.cards}
+                />
+                
+                <TextInput
+                    onChangeText={date => setDate(date)} 
+                    placeholder="Data Planejada"
+                    value={date}
+                    style={style.cards}
+                />
             </View>
-            {/* <Button 
-            style={style.button2} 
-            onPress={() => navigation.navigate('', {})}
-            >
-                Continuar
-            </Button>   */}
+            <Button
+                buttonStyle={{
+                    width: 230,
+                    height: 50,
+                    borderRadius: 15,
+                    backgroundColor: '#23C7D7',
+                }}
+                title="Continuar"
+                onPress={() => navigation.navigate("SuggestedView")}
+            />
             </View> 
         </View>
     )
@@ -48,6 +87,7 @@ const style = StyleSheet.create({
         marginBottom: 8,
         borderRadius: 10,
         flex: 1,
+        alignItems: 'center'
     },
     title: {
         alignSelf: "center",
@@ -86,7 +126,7 @@ const style = StyleSheet.create({
         textAlign: "left",
         fontSize: 16,
         textAlignVertical: "center",
-        paddingLeft: 33,
+        paddingLeft: 20,
         //weight???
     },
     button1: {
@@ -101,6 +141,9 @@ const style = StyleSheet.create({
         width: 203,
         borderRadius: 10,
         backgroundColor: '#23C7D7'
+    },
+    select: {
+        marginTop: 200,
     },
     b1: {
 

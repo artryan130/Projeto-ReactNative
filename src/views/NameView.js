@@ -71,11 +71,6 @@ const style = StyleSheet.create({
         width: 300,
         height: 50,   
     },
-    // image: {
-    //     position: "absolute",
-    //     marginTop: 340,
-    //     left: 70,
-    // },
     inputview: {
         display: 'flex',
         flexDirection: 'row',
