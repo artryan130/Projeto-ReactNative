@@ -4,8 +4,9 @@ import { Button } from 'react-native-elements';
 import { getDados } from "../utils/requests/getDados";
 import { useEffect, useState } from 'react'
 
-export function SuggestedView() {
+export function SuggestedView({ route, navigation }) {
 
+    const  type  = route.params
     const [requestData, setRequestData] = useState({
         activity: '',
         accessibility: '',
@@ -17,8 +18,8 @@ export function SuggestedView() {
     })
 
     useEffect(() => {
-        getDados().then(res => setRequestData(res.data))
-      }, [])
+        getDados(type.paramKey).then(res => setRequestData(res.data))
+    }, [])
 
     return (
         <View style={style.content}>

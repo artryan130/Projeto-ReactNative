@@ -1,8 +1,8 @@
 import axios from 'axios'
 
-export async function getDados() {
+export async function getDados(tipo) {
     const api = axios.create({ baseURL : 'http://www.boredapi.com' })
-    const RANDOM = '/api/activity/'
+    const type = '/api/activity?type='
 
-    return await api.get(RANDOM)
+    return await api.get(`${type}${tipo}`)
 }

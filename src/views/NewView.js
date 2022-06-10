@@ -22,7 +22,6 @@ export function NewView({ route, navigation }){
                 Preencha os <Text style={{color: '#23C7D7'}}>filtros</Text> para sugerirmos uma <Text style={{color: '#23C7D7'}}>nova atividade</Text>
             </Text>
             <View style={style.cardBox}>
-
                 <View style={style.cards}>
                     <RNPickerSelect
                         placeholder={{
@@ -66,7 +65,9 @@ export function NewView({ route, navigation }){
                     backgroundColor: '#23C7D7',
                 }}
                 title="Continuar"
-                onPress={() => navigation.navigate("SuggestedView")}
+                onPress={() => navigation.navigate("SuggestedView", {
+                    paramKey: type,
+                })}
             />
             </View> 
         </View>
