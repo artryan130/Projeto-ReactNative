@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react'
 
 export function SuggestedView({ route, navigation }) {
 
-    const  type  = route.params
+    const  dados  = route.params
+    
     const [requestData, setRequestData] = useState({
         activity: '',
         accessibility: '',
@@ -18,11 +19,13 @@ export function SuggestedView({ route, navigation }) {
     })
 
     useEffect(() => {
-        getDados(type.paramKey).then(res => setRequestData(res.data))
+        getDados(dados.paramKey.type, dados.paramKey.participants).then(res => setRequestData(res.data))
     }, [])
 
     return (
+        
         <View style={style.content}>
+            {console.log(dados)}
             <View style={style.pag}>
                     <Text style={style.text1}>Atividade Sugerida</Text>
                     <Text style={style.text2}>Veja os detalhes da <Text style={style.text3}>atividade sugerida</Text> e escolha se ela será executada</Text>

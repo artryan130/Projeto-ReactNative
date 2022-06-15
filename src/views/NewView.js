@@ -6,7 +6,7 @@ import RNPickerSelect from 'react-native-picker-select';
 export function NewView({ route, navigation }){
 
     const [type, setType] = useState('')
-    const [number, setNumber] = useState('')
+    const [participants, setParticipants] = useState('')
     const [date, setDate] = useState('')
 
     return (
@@ -44,9 +44,9 @@ export function NewView({ route, navigation }){
                 </View>
                 
                 <TextInput
-                    onChangeText={number => setNumber(number)} 
+                    onChangeText={participants => setParticipants(participants)} 
                     placeholder="Quantidade de Participantes"
-                    value={number}
+                    value={participants}
                     style={style.cards}
                 />
                 
@@ -66,7 +66,7 @@ export function NewView({ route, navigation }){
                 }}
                 title="Continuar"
                 onPress={() => navigation.navigate("SuggestedView", {
-                    paramKey: type,
+                    paramKey: {type, participants}
                 })}
             />
             </View> 
