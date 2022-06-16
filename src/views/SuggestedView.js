@@ -25,7 +25,6 @@ export function SuggestedView({ route, navigation }) {
     return (
         
         <View style={style.content}>
-            {console.log(dados)}
             <View style={style.pag}>
                     <Text style={style.text1}>Atividade Sugerida</Text>
                     <Text style={style.text2}>Veja os detalhes da <Text style={style.text3}>atividade sugerida</Text> e escolha se ela será executada</Text>
@@ -41,11 +40,17 @@ export function SuggestedView({ route, navigation }) {
                             width: 230,
                             height: 50,
                             borderRadius: 15,
-                            backgroundColor: '#23C7D7',
+                            backgroundColor: 'white',
+                            marginBottom: 16,
                             borderColor: '#23C7D7',
-                            marginBottom: 16
+                            borderWidth: 1
                         }}
+                        titleStyle={{
+                            color:'#23C7D7'
+                        }}
+                        type= 'outline'
                         title="Descartar"
+                        onPress={() => navigation.navigate("Nova Atividade")}
                     />
                     <Button
                         buttonStyle={{
@@ -55,6 +60,7 @@ export function SuggestedView({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Adicionar Atividade"
+                        onPress={() => navigation.navigate("Atividades Planejadas")}
                     />
             </View>
         </View>
