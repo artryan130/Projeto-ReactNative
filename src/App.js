@@ -54,6 +54,7 @@ export function TabRoutes({ route }) {
         initialRouteName={subtela}
         screenOptions={({route}) => ({
           tabBarActiveTintColor: 'black',
+          headerShown: false,
           tabBarInactiveTintColor: 'gray'
         })}
         >
