@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import {Text, View, StyleSheet, TextInput } from "react-native"; 
+import { Text, View, StyleSheet, TextInput } from "react-native";
 import { Button, Input } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 
-export function PlannedView({ route, navigation }){
+export function PlannedView({ route, navigation }) {
 
     const [type, setType] = useState('')
     const [number, setNumber] = useState('')
@@ -11,39 +11,40 @@ export function PlannedView({ route, navigation }){
 
     return (
         <View style={style.gen}>
-             <View style={style.box}>
-             {/* <Button style={style.button1}>
-                Voltar
-            </Button>  */}
-             <Text style={style.title}>
-                Atividades Planejadas
-            </Text>
-            <Text style={style.subtitle}>
-                Confira os <Text style={{color: '#23C7D7'}}>cards</Text> com informações das suas <Text style={{color: '#23C7D7'}}>atividades planejadas</Text>
-            </Text>
-            <View style={style.ativ}>
-                <Text style={style.text}>Card Atividade 1</Text>
-                <Text style={style.data}>00/00/0000</Text>
+            <View style={style.box}>
+                <Button
+                    title="Voltar"
+                    onPress={() => navigation.navigate("HomeView", { paramKey: null })}
+                />
+                <Text style={style.title}>
+                    Atividades Planejadas
+                </Text>
+                <Text style={style.subtitle}>
+                    Confira os <Text style={{ color: '#23C7D7' }}>cards</Text> com informações das suas <Text style={{ color: '#23C7D7' }}>atividades planejadas</Text>
+                </Text>
+                <View style={style.ativ}>
+                    <Text style={style.text}>Card Atividade 1</Text>
+                    <Text style={style.data}>00/00/0000</Text>
+                </View>
+                <View style={style.ativ}>
+                    <Text style={style.text}>Card Atividade 2</Text>
+                    <Text style={style.data}>00/00/0000</Text>
+                </View>
+                <View style={style.ativ}>
+                    <Text style={style.text}>Card Atividade 3</Text>
+                    <Text style={style.data}>00/00/0000</Text>
+                </View>
+
+                <Text style={style.footer}>
+                    Clique em algum card para mais informações
+                </Text>
             </View>
-            <View style={style.ativ}>
-                <Text style={style.text}>Card Atividade 2</Text>
-                <Text style={style.data}>00/00/0000</Text>
-            </View>
-            <View style={style.ativ}>
-                <Text style={style.text}>Card Atividade 3</Text>
-                <Text style={style.data}>00/00/0000</Text>
-            </View>
-  
-            <Text style={style.footer}>
-                Clique em algum card para mais informações
-            </Text>
-            </View> 
         </View>
     )
 }
 
 const style = StyleSheet.create({
-    gen:{
+    gen: {
         backgroundColor: '#23C7D74A',
         margin: 0,
         flex: 1
@@ -63,7 +64,7 @@ const style = StyleSheet.create({
         fontSize: 25,
         marginBottom: 30,
         textDecorationLine: "underline",
-        textDecorationColor: "#23C7D7", 
+        textDecorationColor: "#23C7D7",
     },
     subtitle: {
         fontSize: 16,
@@ -95,7 +96,7 @@ const style = StyleSheet.create({
         fontSize: 16,
         marginLeft: 14
     },
-    footer:{
+    footer: {
         marginBottom: 0,
         marginTop: 40,
         fontSize: 14,
