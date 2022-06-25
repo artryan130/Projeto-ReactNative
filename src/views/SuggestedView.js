@@ -3,11 +3,24 @@ import {Text, View, StyleSheet } from "react-native";
 import { Button } from 'react-native-elements';
 import { getDados } from "../utils/requests/getDados";
 import { useEffect, useState } from 'react'
+import { useAsyncStorage } from '@react-native-async-storage/async-storage';
 
 export function SuggestedView({ route, navigation }) {
 
     const  dados  = route.params
+
+    const [saverequestData, setSaveRequestData] = useState([{
+        activity: '',
+        accessibility: '',
+        type: '',
+        participants: '',
+        price: '',
+        link: '',
+        key: ''
+    }])
+    const { getItem, setItem } = useAsyncStorage('dados');
     
+
     const [requestData, setRequestData] = useState({
         activity: '',
         accessibility: '',
@@ -18,10 +31,24 @@ export function SuggestedView({ route, navigation }) {
         key: ''
     })
 
+    
     useEffect(() => {
         getDados(dados.paramKey.type, dados.paramKey.participants).then(res => setRequestData(res.data))
     }, [])
 
+
+    const storeData = async (value) => {
+        const jsonValue = JSON.parse(value)
+        await setItem(jsonValue);
+        setSaveRequestData(jsonValue);
+        console.log(saverequestData[0])
+    }
+
+    const readItemFromStorage = async () => {
+        const jsonValue = await getItem()
+        setSaveRequestData(JSON.parse(jsonValue));
+    };
+     
     return (
         
         <View style={style.content}>
@@ -60,7 +87,14 @@ export function SuggestedView({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Adicionar Atividade"
-                        onPress={() => navigation.navigate("Atividades Planejadas")}
+                        onPress={() => {
+                            storeData(requestData)
+                            readItemFromStorage()
+                            navigation.navigate("Atividades Planejadas", {
+                                paramKey: saverequestData
+                            }
+                            )
+                        }}
                     />
             </View>
         </View>

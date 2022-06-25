@@ -9,6 +9,9 @@ export function PlannedView({ route, navigation }) {
     const [number, setNumber] = useState('')
     const [date, setDate] = useState('')
 
+    const { paramKey } = route.params
+    {console.log(paramKey[0])}
+
     return (
         <View style={style.gen}>
             <View style={style.box}>
