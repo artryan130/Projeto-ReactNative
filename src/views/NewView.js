@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput } from "react-native"; 
 import { Button, Input } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export function NewView({ route, navigation }){
 
@@ -66,7 +67,7 @@ export function NewView({ route, navigation }){
                 }}
                 title="Continuar"
                 onPress={() => navigation.navigate("SuggestedView", {
-                    paramKey: {type, participants}
+                    paramKey: {type, participants,date}
                 })}
             />
             </View> 
@@ -82,20 +83,24 @@ const style = StyleSheet.create({
     },
     box: {
         backgroundColor: '#FFFFFF',
-        marginTop: 11,
-        marginLeft: 13,
-        marginRight: 12,
-        marginBottom: 8,
+        marginTop: RFValue(28),
+        marginLeft: RFValue(20),
+        marginRight: RFValue(20),
+        marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
         alignItems: 'center'
     },
     title: {
-        alignSelf: "center",
-        fontSize: 25,
-        marginBottom: 25,
-        textDecorationLine: "underline",
-        textDecorationColor: "#23C7D7", 
+        fontSize: 30,
+        // fontFamily: 'Poppins-Medium',
+        fontWeight: 'bold',
+        marginTop: RFValue(10),
+        marginBottom: RFValue(20),
+        borderBottomColor: '#2896D3',
+        borderBottomWidth: RFValue(5),
+        borderBottomLeftRadius: 2.5,
+        borderBottomRightRadius: 2.5
     },
     subtitle: {
         fontSize: 16,

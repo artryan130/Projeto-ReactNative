@@ -3,24 +3,13 @@ import {Text, View, StyleSheet } from "react-native";
 import { Button } from 'react-native-elements';
 import { getDados } from "../utils/requests/getDados";
 import { useEffect, useState } from 'react'
-import { useAsyncStorage } from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 
 export function SuggestedView({ route, navigation }) {
 
     const  dados  = route.params
-
-    const [saverequestData, setSaveRequestData] = useState([{
-        activity: '',
-        accessibility: '',
-        type: '',
-        participants: '',
-        price: '',
-        link: '',
-        key: ''
-    }])
-    const { getItem, setItem } = useAsyncStorage('dados');
     
-
     const [requestData, setRequestData] = useState({
         activity: '',
         accessibility: '',
@@ -28,7 +17,9 @@ export function SuggestedView({ route, navigation }) {
         participants: '',
         price: '',
         link: '',
-        key: ''
+        key: '',
+        id: '',
+        date: 'asda',
     })
 
     
@@ -38,16 +29,36 @@ export function SuggestedView({ route, navigation }) {
 
 
     const storeData = async (value) => {
-        const jsonValue = JSON.parse(value)
-        await setItem(jsonValue);
-        setSaveRequestData(jsonValue);
-        console.log(saverequestData[0])
-    }
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('Atividades', jsonValue)
+        } catch (e) {
+          // saving error
+        }
+      }
 
-    const readItemFromStorage = async () => {
-        const jsonValue = await getItem()
-        setSaveRequestData(JSON.parse(jsonValue));
-    };
+      const armazenarAtividade = async() => {
+        try{
+          const jsonValue = await AsyncStorage.getItem('Atividades')
+          if(jsonValue != null && JSON.parse(jsonValue).length > 0){
+            const arrAtividades = JSON.parse(jsonValue);
+            requestData.id = arrAtividades[arrAtividades.length - 1].id + 1;
+            requestData.date = dados.paramKey.date
+            arrAtividades.push(requestData);
+            storeData(arrAtividades);
+          }else{
+            const arrAtividades = [];
+            requestData.id = 1;
+            requestData.date = '10/10/2010'
+            arrAtividades.push(requestData);
+            storeData(arrAtividades);
+          }
+          navigation.navigate('Atividades Planejadas');
+        }catch(e){
+            console.log('erro ao armazenar');
+            console.log(e);
+        }
+    }
      
     return (
         
@@ -57,8 +68,8 @@ export function SuggestedView({ route, navigation }) {
                     <Text style={style.text2}>Veja os detalhes da <Text style={style.text3}>atividade sugerida</Text> e escolha se ela será executada</Text>
                     <View style={style.card}>
                         <Text style={style.text5}><Text style={style.text4}>Nome:</Text>{requestData.activity}</Text>
-                        <Text style={style.text5}><Text style={style.text4}>Tipo:</Text>{requestData.type}</Text>
-                        <Text style={style.text5}><Text style={style.text4}>Acessibilidade:</Text>{requestData.accessibility}</Text>
+                        <Text style={style.text5}><Text style={style.text4}>Tipo de atividade:</Text>{requestData.type}</Text>
+                        <Text style={style.text5}><Text style={style.text4}>Acessibilidade <Text style={style.text6}>(dificuldade para realizar a atividade de 0 até 1):</Text></Text>{requestData.accessibility}</Text>
                         <Text style={style.text5}><Text style={style.text4}>Preço:</Text>{requestData.price}</Text>
                         <Text style={style.text5}><Text style={style.text4}>Participantes:</Text>{requestData.participants}</Text>
                     </View>
@@ -87,13 +98,9 @@ export function SuggestedView({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Adicionar Atividade"
-                        onPress={() => {
-                            storeData(requestData)
-                            readItemFromStorage()
-                            navigation.navigate("Atividades Planejadas", {
-                                paramKey: saverequestData
-                            }
-                            )
+                        onPress={()=> {
+                            armazenarAtividade
+                            navigation.navigate("Atividades Planejadas")
                         }}
                     />
             </View>
@@ -111,15 +118,15 @@ const style = StyleSheet.create({
     },  
     pag: {
         backgroundColor: '#FFFFFF',
-        marginTop: 22,
+        marginTop: RFValue(28),
         flex: 1,
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
         padding: 10,
-        marginLeft: 12,
-        marginRight: 12,
-        marginBottom: 8,
+        marginLeft: RFValue(20),
+        marginRight: RFValue(20),
+        marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
     },
@@ -127,14 +134,17 @@ const style = StyleSheet.create({
         fontSize: 30,
         // fontFamily: 'Poppins-Medium',
         fontWeight: 'bold',
-        marginTop: 40,
-        textDecorationLine: "underline",
-        textDecorationColor: '#23C7D7',
+        marginTop: RFValue(10),
+        marginBottom: RFValue(20),
+        borderBottomColor: '#2896D3',
+        borderBottomWidth: RFValue(5),
+        borderBottomLeftRadius: 2.5,
+        borderBottomRightRadius: 2.5
     },
     text2: {
-        fontSize: 18,
+        fontSize: RFValue(14),
         // fontFamily: 'Poppins-Medium',
-        marginTop: 30,
+        marginTop: RFValue(10),
         textAlign: "center",
         padding: 10,
     },
@@ -146,6 +156,9 @@ const style = StyleSheet.create({
     },
     text5: {
         padding: 5
+    },
+    text6: {
+        fontWeight: 'normal'
     },
     card: {
         padding: 20,

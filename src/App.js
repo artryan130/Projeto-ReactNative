@@ -12,6 +12,7 @@ import { Entypo } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons'; 
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SuggestedView } from './views/SuggestedView'
+import { ViewActivity } from './views/ViewActivity'
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
@@ -39,7 +40,12 @@ export default function StackRoutes() {
         <Stack.Screen
           name='SuggestedView'
           component={SuggestedView}
-          />
+        />
+        <Stack.Screen
+          name='ViewActivity'
+          component={ViewActivity}
+        />
+
       </Stack.Navigator>
     </NavigationContainer>
   )
