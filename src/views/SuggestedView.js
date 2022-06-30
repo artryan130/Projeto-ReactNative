@@ -19,7 +19,18 @@ export function SuggestedView({ route, navigation }) {
         link: '',
         key: '',
         id: '',
-        date: 'asda',
+    })
+
+    const [requestDados, setRequestDados] = useState({
+        activity: '',
+        accessibility: '',
+        type: '',
+        participants: '',
+        price: '',
+        link: '',
+        key: '',
+        id: '',
+        date: ''
     })
 
     
@@ -27,6 +38,7 @@ export function SuggestedView({ route, navigation }) {
         getDados(dados.paramKey.type, dados.paramKey.participants).then(res => setRequestData(res.data))
     }, [])
 
+    useEffect(() => {setRequestDados({...requestData, date: dados.paramKey.date})}, [requestData])
 
     const storeData = async (value) => {
         try {
@@ -37,20 +49,18 @@ export function SuggestedView({ route, navigation }) {
         }
       }
 
-      const armazenarAtividade = async() => {
+    const armazenarAtividade = async() => {
         try{
           const jsonValue = await AsyncStorage.getItem('Atividades')
           if(jsonValue != null && JSON.parse(jsonValue).length > 0){
             const arrAtividades = JSON.parse(jsonValue);
-            requestData.id = arrAtividades[arrAtividades.length - 1].id + 1;
-            requestData.date = dados.paramKey.date
-            arrAtividades.push(requestData);
+            requestDados.id = arrAtividades[arrAtividades.length - 1].id + 1;
+            arrAtividades.push(requestDados);
             storeData(arrAtividades);
           }else{
             const arrAtividades = [];
-            requestData.id = 1;
-            requestData.date = '10/10/2010'
-            arrAtividades.push(requestData);
+            requestDados.id = 1;
+            arrAtividades.push(requestDados);
             storeData(arrAtividades);
           }
           navigation.navigate('Atividades Planejadas');
@@ -98,10 +108,7 @@ export function SuggestedView({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Adicionar Atividade"
-                        onPress={()=> {
-                            armazenarAtividade
-                            navigation.navigate("Atividades Planejadas")
-                        }}
+                        onPress={armazenarAtividade}
                     />
             </View>
         </View>

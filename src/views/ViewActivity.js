@@ -2,11 +2,39 @@ import React, { useState } from "react";
 import {Text, View, StyleSheet, TextInput, Image } from "react-native"; 
 import { Button } from 'react-native-elements';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function ViewActivity({ route, navigation }) {
     
     const {dados} = route.params;
     
+    const storeData = async (value) => {
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('Atividades', jsonValue)
+        } catch (e) {
+          // saving error
+        }
+    }
+
+
+    const remove_user = async(id) => {
+        try{
+            const jsonValue = await AsyncStorage.getItem('Atividades')
+            const arrAtividades = JSON.parse(jsonValue);
+            arrAtividades.splice(id-1, 1);
+            storeData(arrAtividades)
+            navigation.navigate('Atividades Planejadas');
+        }
+        
+        catch(e){
+            console.log('erro ao armazenar');
+            console.log(e);
+        }
+    }
+
+
+
     return (
         <View style={style.content}>
             <View style={style.pag}>
@@ -39,7 +67,7 @@ export function ViewActivity({ route, navigation }) {
                         }}
                         type= 'outline'
                         title="Excluir atividade"
-                        // onPress={() => navigation.navigate("Nova Atividade")}
+                        onPress={() => remove_user(dados.id)}
                     />
                     <Button
                         buttonStyle={{
@@ -49,7 +77,7 @@ export function ViewActivity({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Concluir atividade"
-                        // onPress={()=> navigation.navigate("Atividades Planejadas")}
+                        // onPress={}
                     />
             </View>
         </View>

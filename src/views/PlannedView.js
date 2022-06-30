@@ -6,6 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Card from "../components/Card";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { useFocusEffect } from '@react-navigation/native';
 
 export function PlannedView({ route, navigation }) {
 
@@ -29,9 +30,18 @@ export function PlannedView({ route, navigation }) {
         }
     }
     
-    useEffect(() => {
-        getActivity()
-    }, [])
+    useFocusEffect(
+        React.useCallback(() => {
+          //Below alert will fire every time when profile screen is focused
+          getActivity();
+            // apagarLista();
+        }, [])
+      );
+
+
+    // useEffect(() => {
+    //     getActivity()
+    // }, [activityList])
 
     return (
 
@@ -44,7 +54,7 @@ export function PlannedView({ route, navigation }) {
                     Confira <Text style={style.text3}>os cards</Text> com mais informações das suas <Text style={style.text3}>atividades planjeadas</Text>
                 </Text>
 
-                <View>
+                <View style={style.flat}>
                     <FlatList 
                         data={activityList}
                         keyExtractor={item => item.id}
@@ -204,4 +214,7 @@ const style = StyleSheet.create({
     text3: {
         color: '#23C7D7'
     },
+    flat: {
+        height: RFValue(350),
+    }
 })
