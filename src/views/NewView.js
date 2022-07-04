@@ -14,9 +14,6 @@ export function NewView({ route, navigation }){
     return (
         <View style={style.gen}>
              <View style={style.box}>
-             {/* <Button style={style.button1}>
-                Voltar
-            </Button>  */}
              <Text style={style.title}>
                 Nova Atividade
             </Text>
@@ -60,8 +57,8 @@ export function NewView({ route, navigation }){
             </View>
             <Button
                 buttonStyle={{
-                    width: 230,
-                    height: 50,
+                    width: RFValue(190),
+                    height: RFValue(46),
                     borderRadius: 15,
                     backgroundColor: '#23C7D7',
                 }}
@@ -92,7 +89,7 @@ const style = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        fontSize: 30,
+        fontSize: RFValue(26),
         // fontFamily: 'Poppins-Medium',
         fontWeight: 'bold',
         marginTop: RFValue(10),
@@ -103,58 +100,38 @@ const style = StyleSheet.create({
         borderBottomRightRadius: 2.5
     },
     subtitle: {
-        fontSize: 16,
+        fontSize: RFValue(16),
         alignSelf: "center",
-        marginLeft: 17,
-        marginRight: 17,
+        marginLeft: RFValue(12),
+        marginRight: RFValue(12),
         textAlign: "center",
-        marginBottom: 26,
+        marginBottom: RFValue(23),
     },
     cardBox: {
-        height: 329,
-        width: 355,
+        height: RFValue(300),
+        width: RFValue(295),
         borderRadius: 10,
         backgroundColor: '#23C7D7',
         marginTop: 0,
-        marginBottom: 97,
-        marginLeft: 12,
-        marginRight: 12,
+        marginBottom: RFValue(84),
+        marginLeft: RFValue(10),
+        marginRight: RFValue(10),
         alignItems: "center",
         alignSelf: "center",
     },
     cards: {
-        width: 288,
-        height: 51,
+        width: RFValue(240),
+        height: RFValue(43),
         marginBottom: 0,
-        marginTop: 40,
+        marginTop: RFValue(36),
         borderRadius: 10,
         backgroundColor: '#FFFFFF',
         textAlign: "left",
-        fontSize: 16,
+        fontSize: RFValue(15),
         textAlignVertical: "center",
-        paddingLeft: 20,
-        //weight???
-    },
-    button1: {
-        width: 70,
-        height: 10,
-        backgroundColor: 'FFFFFF',
-        flex: 1,
-
-    },
-    button2: {
-        height: 41,
-        width: 203,
-        borderRadius: 10,
-        backgroundColor: '#23C7D7'
+        paddingLeft: RFValue(17),
     },
     select: {
-        marginTop: 200,
+        marginTop: RFValue(190),
     },
-    b1: {
-
-    },
-    b2: {
-
-    }
 })
