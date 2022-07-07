@@ -3,11 +3,34 @@ import {Text, View, StyleSheet, TextInput, Image } from "react-native";
 import { Button } from 'react-native-elements';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect } from '@react-navigation/native';
 
-export function ViewActivity({ route, navigation }) {
+export function ViewActivity({ route, navigation, subtela }) {
     
     const {dados} = route.params;
-    
+    let arrAtividades = [];
+
+    const getActivity = async() => {
+        try{
+          const jsonValue = await AsyncStorage.getItem('Atividades')
+          if(jsonValue != null){
+            arrAtividades = JSON.parse(jsonValue);
+          }else{
+            console.log('sem dados na lista');
+            return null;
+          }
+        }catch(e){
+            console.log(e);
+        }
+      }
+
+      useFocusEffect(
+        React.useCallback(() => {
+            getActivity();
+        }, [])
+    );
+
+
     const storeData = async (value) => {
         try {
           const jsonValue = JSON.stringify(value)
@@ -17,8 +40,17 @@ export function ViewActivity({ route, navigation }) {
         }
     }
 
+    const storeHistorico = async (value) => {
+        try {
+          const jsonValue = JSON.stringify(value)
+          await AsyncStorage.setItem('Historico', jsonValue)
+        } catch (e) {
+          // saving error
+        }
+    }
 
-    const remove_user = async(id) => {
+
+    const remove_activity = async(id) => {
         try{
             const jsonValue = await AsyncStorage.getItem('Atividades')
             const arrAtividades = JSON.parse(jsonValue);
@@ -28,14 +60,49 @@ export function ViewActivity({ route, navigation }) {
         }
         
         catch(e){
+            console.log('erro ao excluir');
+            console.log(e);
+        }
+    }
+
+    const concluir_activity = async() => {
+        let index = 0;
+        let atividade = {};
+        for(let i = 0; i < arrAtividades.length; i++){
+            if(dados.activity == arrAtividades[i].activity){
+                atividade = arrAtividades[i]; 
+                break;
+            }
+            index++;
+        }
+        if(index > -1){
+            arrAtividades.splice(index, 1);
+            storeData(arrAtividades);
+            armazenarHistorico(atividade);
+        }
+    }
+
+    const armazenarHistorico = async(atividade) => {
+        try{
+          const jsonValue = await AsyncStorage.getItem('Historico')
+          if(jsonValue != null && JSON.parse(jsonValue).length > 0){
+            const arrAtividadesHistorico = JSON.parse(jsonValue);
+            arrAtividadesHistorico.push(atividade);
+            storeHistorico(arrAtividadesHistorico);
+          }else{
+            const arrAtividadesHistorico = [];
+            arrAtividadesHistorico.push(atividade);
+            storeHistorico(arrAtividadesHistorico);
+          }
+          navigation.navigate('Atividades Planejadas');
+        }catch(e){
             console.log('erro ao armazenar');
             console.log(e);
         }
     }
 
-
-
     return (
+        
         <View style={style.content}>
             <View style={style.pag}>
                 <Text style={style.text1}>
@@ -46,6 +113,7 @@ export function ViewActivity({ route, navigation }) {
                 </Text>
                 <View style={style.card}>
                     <Text style={style.text7}>Card Atividade{dados.id}</Text>
+                    <Text style={style.text5}>{dados.date}</Text>
                     <Text style={style.text5}><Text style={style.text4}>Nome:</Text>{dados.activity}</Text>
                     <Text style={style.text5}><Text style={style.text4}>Tipo de atividade:</Text>{dados.type}</Text>
                     <Text style={style.text5}><Text style={style.text4}>Acessibilidade <Text style={style.text6}>(dificuldade para realizar a atividade de 0 até 1):</Text></Text>{dados.accessibility}</Text>
@@ -67,7 +135,7 @@ export function ViewActivity({ route, navigation }) {
                         }}
                         type= 'outline'
                         title="Excluir atividade"
-                        onPress={() => remove_user(dados.id)}
+                        onPress={() => remove_activity(dados.id)}
                     />
                     <Button
                         buttonStyle={{
@@ -77,7 +145,7 @@ export function ViewActivity({ route, navigation }) {
                             backgroundColor: '#23C7D7',
                         }}
                         title="Concluir atividade"
-                        // onPress={}
+                        onPress={concluir_activity}
                     />
             </View>
         </View>

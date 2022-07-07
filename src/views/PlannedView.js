@@ -26,7 +26,7 @@ export function PlannedView({ route, navigation }) {
             return null;
           }
         }catch(e){
-            console.log('erro ao armazenar nome do usuário');
+            console.log('erro ao buscar as atividades');
         }
     }
     

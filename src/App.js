@@ -13,6 +13,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 import { SuggestedView } from './views/SuggestedView'
 import { ViewActivity } from './views/ViewActivity'
+import { ViewHistoryActivity } from './views/ViewHistoryActivity'
 
 const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
@@ -45,7 +46,10 @@ export default function StackRoutes() {
           name='ViewActivity'
           component={ViewActivity}
         />
-
+        <Stack.Screen
+          name='ViewHistoryActivity'
+          component={ViewHistoryActivity}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   )
