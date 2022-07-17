@@ -6,10 +6,55 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
 import { ButtonBack } from "../components/ButtonBack";
 
+import i18n from "i18next";
+import { useTranslation, initReactI18next } from "react-i18next";
+
+i18n
+  .use(initReactI18next) // passes i18n down to react-i18next
+  .init({
+    // the translations
+    // (tip move them in a JSON file and import them,
+    // or even better, manage them via a UI: https://react.i18next.com/guides/multiple-translation-files#manage-your-translations-with-a-management-gui)
+    compatibilityJSON: 'v3',
+    resources: {
+      en: {
+        translation: {
+          
+          "diy": "Faça você mesmo",
+          "education": "Educacional",
+          "recreational": "Recreacional",
+          "social": "Social",
+          "charity": "Caridade",
+          "cooking": "Culinária",
+          "relaxation": "Relaxamento",
+          "music": "Música",
+          "busywork": "Trabalho",
+
+          "Make a scrapbook with pictures of your favorite memories": "Faça um álbum de recortes com fotos de suas memórias favoritas",
+          "Resolve a problema you've been putting off": "Resolva um problema que você está adiando",
+          "Learn how to whistle with your fingers": "Aprenda a assobiar com os dedos",
+          "Read a formal research paper on an interesting subject": "Leia um artigo de pesquisa formal sobre um assunto interessante",
+          "Learn how to make a website": "Aprenda a fazer um site",
+          "Learn the NATO phonetic alphabet": "Aprenda o alfabeto fonético da OTAN",
+          "Learn how to use an Arduino": "Aprenda a usar um Arduino",
+          "Learn how the internet works": "Aprenda como a internet funciona"
+        }
+      }
+    },
+    lng: "en", // if you're using a language detector, do not define the lng option
+    fallbackLng: "en",
+
+    interpolation: {
+      escapeValue: false // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
+    }
+  });
+
 export function ViewActivity({ route, navigation, subtela }) {
     
     const {dados} = route.params;
     let arrAtividades = [];
+
+    const { t } = useTranslation();
 
     const getActivity = async() => {
         try{
@@ -134,11 +179,11 @@ export function ViewActivity({ route, navigation, subtela }) {
                 <View style={style.card}>
                     <Text style={style.text7}>Card Atividade{dados.id}</Text>
                     <Text style={style.text5}>{dados.date}</Text>
-                    <Text style={style.text5}><Text style={style.text4}>Nome:</Text>{dados.activity}</Text>
-                    <Text style={style.text5}><Text style={style.text4}>Tipo de atividade:</Text>{dados.type}</Text>
-                    <Text style={style.text5}><Text style={style.text4}>Acessibilidade <Text style={style.text6}>(dificuldade para realizar a atividade de 0 até 1):</Text></Text>{dados.accessibility}</Text>
-                    <Text style={style.text5}><Text style={style.text4}>Preço:</Text>{dados.price}</Text>
-                    <Text style={style.text5}><Text style={style.text4}>Participantes:</Text>{dados.participants}</Text>
+                    <Text style={style.text5}><Text style={style.text4}>Nome:</Text>{t(dados.activity)}</Text>
+                    <Text style={style.text5}><Text style={style.text4}>Tipo de atividade:</Text>{t(dados.type)}</Text>
+                    <Text style={style.text5}><Text style={style.text4}>Acessibilidade <Text style={style.text6}>(dificuldade para realizar a atividade de 0 até 1):</Text></Text>{t(dados.accessibility)}</Text>
+                    <Text style={style.text5}><Text style={style.text4}>Preço:</Text>{t(dados.price)}</Text>
+                    <Text style={style.text5}><Text style={style.text4}>Participantes:</Text>{t(dados.participants)}</Text>
                 </View>
                 <Button
                         buttonStyle={{
