@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { ButtonBack } from "../components/ButtonBack";
 
 export function ViewActivity({ route, navigation, subtela }) {
     
@@ -54,11 +55,27 @@ export function ViewActivity({ route, navigation, subtela }) {
         try{
             const jsonValue = await AsyncStorage.getItem('Atividades')
             const arrAtividades = JSON.parse(jsonValue);
-            arrAtividades.splice(id-1, 1);
-            storeData(arrAtividades)
-            navigation.navigate('Atividades Planejadas');
+
+            let index = 0;
+            let atividade = {};
+            for(let i = 0; i < arrAtividades.length; i++){
+                if(dados.activity == arrAtividades[i].activity){
+                atividade = arrAtividades[i]; 
+                    break;
+                }
+            index++;
+            }
+            if(index > -1){
+                arrAtividades.splice(index, 1);
+                storeData(arrAtividades);
+
+
+
+                // arrAtividades.splice(id-1, 1);
+                // storeData(arrAtividades)
+                navigation.navigate('Atividades Planejadas');
+            }
         }
-        
         catch(e){
             console.log('erro ao excluir');
             console.log(e);
@@ -105,6 +122,9 @@ export function ViewActivity({ route, navigation, subtela }) {
         
         <View style={style.content}>
             <View style={style.pag}>
+            <View style = {style.topButtons}>
+                <ButtonBack navigation={navigation}/>
+             </View>
                 <Text style={style.text1}>
                     Atividades Planejadas
                 </Text>
@@ -165,12 +185,16 @@ const style = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 10,
         marginLeft: RFValue(20),
         marginRight: RFValue(20),
         marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
+    },
+    topButtons:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     text1: {
         fontSize: 30,

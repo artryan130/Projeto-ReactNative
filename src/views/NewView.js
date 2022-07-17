@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, TextInput } from "react-native";
 import { Button, Input } from 'react-native-elements';
 import RNPickerSelect from 'react-native-picker-select';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { ButtonBack } from "../components/ButtonBack";
 
 export function NewView({ route, navigation }){
 
@@ -14,6 +15,9 @@ export function NewView({ route, navigation }){
     return (
         <View style={style.gen}>
              <View style={style.box}>
+             <View style = {style.topButtons}>
+                <ButtonBack navigation={navigation}/>
+             </View>
              <Text style={style.title}>
                 Nova Atividade
             </Text>
@@ -118,6 +122,11 @@ const style = StyleSheet.create({
         marginRight: RFValue(10),
         alignItems: "center",
         alignSelf: "center",
+    },
+    topButtons:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     cards: {
         width: RFValue(240),

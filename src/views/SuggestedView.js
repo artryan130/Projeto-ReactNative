@@ -5,6 +5,7 @@ import { getDados } from "../utils/requests/getDados";
 import { useEffect, useState } from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { ButtonBack } from "../components/ButtonBack";
 
 export function SuggestedView({ route, navigation }) {
 
@@ -74,6 +75,9 @@ export function SuggestedView({ route, navigation }) {
         
         <View style={style.content}>
             <View style={style.pag}>
+            <View style = {style.topButtons}>
+                <ButtonBack navigation={navigation}/>
+             </View>
                     <Text style={style.text1}>Atividade Sugerida</Text>
                     <Text style={style.text2}>Veja os detalhes da <Text style={style.text3}>atividade sugerida</Text> e escolha se ela será executada</Text>
                     <View style={style.card}>
@@ -130,12 +134,16 @@ const style = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 10,
         marginLeft: RFValue(20),
         marginRight: RFValue(20),
         marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
+    },
+    topButtons:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     text1: {
         fontSize: 30,

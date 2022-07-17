@@ -4,6 +4,7 @@ import { Button } from 'react-native-elements';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFocusEffect } from '@react-navigation/native';
+import { ButtonBack } from "../components/ButtonBack";
 
 export function ViewHistoryActivity({ route, navigation, subtela }) {
 
@@ -13,6 +14,9 @@ export function ViewHistoryActivity({ route, navigation, subtela }) {
         
         <View style={style.content}>
             <View style={style.pag}>
+            <View style = {style.topButtons}>
+                <ButtonBack navigation={navigation}/>
+             </View>
                 <Text style={style.text1}>
                     Atividade Concluída
                 </Text>
@@ -46,12 +50,16 @@ const style = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 10,
         marginLeft: RFValue(20),
         marginRight: RFValue(20),
         marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
+    },
+    topButtons:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     text1: {
         fontSize: 30,

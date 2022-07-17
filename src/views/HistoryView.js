@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import Card from "../components/Card";
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
 import { useFocusEffect } from '@react-navigation/native';
-
+import { ButtonBack } from "../components/ButtonBack";
 
 export function HistoryView({ navigation }) {
     
@@ -42,6 +42,9 @@ export function HistoryView({ navigation }) {
       return (
         <View style={style.content}>
             <View style={style.pag}>
+            <View style = {style.topButtons}>
+                <ButtonBack navigation={navigation}/>
+             </View>
                 <Text style={style.text1}>
                     Historico de Atividades
                 </Text>
@@ -77,12 +80,16 @@ const style = StyleSheet.create({
         flexDirection: 'column',
         alignItems: 'center',
         backgroundColor: '#fff',
-        padding: 10,
         marginLeft: RFValue(20),
         marginRight: RFValue(20),
         marginBottom: RFValue(20),
         borderRadius: 10,
         flex: 1,
+    },
+    topButtons:{
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     text1: {
         fontSize: 28,
