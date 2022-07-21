@@ -1,5 +1,5 @@
 import React from "react";
-import {Text, View, StyleSheet } from "react-native"; 
+import {Text, View, StyleSheet, Alert } from "react-native"; 
 import { Button } from 'react-native-elements';
 import { getDados } from "../utils/requests/getDados";
 import { useEffect, useState } from 'react'
@@ -35,9 +35,28 @@ export function SuggestedView({ route, navigation }) {
     })
 
     
-    useEffect(() => {
-        getDados(dados.paramKey.type, dados.paramKey.participants).then(res => setRequestData(res.data))
+    
+    useEffect( () => {
+        getDados(dados.paramKey.type, dados.paramKey.participants).then(res => {
+            if(res.data.error) {
+                Alert.alert("Não encontramos nada :(","Não foi possível encontrar uma atividade desse tipo para essa quantidade de participantes. Por favor, descarte a atividade e tente outra combinação :)");
+            }else{
+                setRequestData(res.data)
+            }
+            console.log(res.data)
+        })
     }, [])
+
+    // useEffect(() => {
+    //     async function fetchMyAPI() {
+    //       let response = await getDados(dados.paramKey.type, dados.paramKey.participants)
+    //       setRequestData(response)
+    //     }
+        
+    //     fetchMyAPI()
+    //   }, [])
+
+      
 
     useEffect(() => {setRequestDados({...requestData, date: dados.paramKey.date})}, [requestData])
 
