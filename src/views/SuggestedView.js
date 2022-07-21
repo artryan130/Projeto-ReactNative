@@ -34,8 +34,6 @@ export function SuggestedView({ route, navigation }) {
         date: ''
     })
 
-    
-    
     useEffect( () => {
         getDados(dados.paramKey.type, dados.paramKey.participants).then(res => {
             if(res.data.error) {
@@ -46,17 +44,6 @@ export function SuggestedView({ route, navigation }) {
             console.log(res.data)
         })
     }, [])
-
-    // useEffect(() => {
-    //     async function fetchMyAPI() {
-    //       let response = await getDados(dados.paramKey.type, dados.paramKey.participants)
-    //       setRequestData(response)
-    //     }
-        
-    //     fetchMyAPI()
-    //   }, [])
-
-      
 
     useEffect(() => {setRequestDados({...requestData, date: dados.paramKey.date})}, [requestData])
 
